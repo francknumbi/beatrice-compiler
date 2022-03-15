@@ -231,13 +231,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAValeurTerme(AValeurTerme node)
+    public void caseAValeurEntiereTerme(AValeurEntiereTerme node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAValeurReelTerme(AValeurReelTerme node)
     {
         defaultCase(node);
     }
 
     @Override
     public void caseAIdentifiantTerme(AIdentifiantTerme node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAChaineTerme(AChaineTerme node)
     {
         defaultCase(node);
     }
@@ -255,7 +267,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAPrint(APrint node)
+    public void caseASequencePrint(ASequencePrint node)
     {
         defaultCase(node);
     }
@@ -267,7 +279,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseASequenceMessage(ASequenceMessage node)
+    public void caseAMessage(AMessage node)
     {
         defaultCase(node);
     }
@@ -501,7 +513,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTNumerique(TNumerique node)
+    public void caseTNombreEntier(TNombreEntier node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTNombreReel(TNombreReel node)
     {
         defaultCase(node);
     }

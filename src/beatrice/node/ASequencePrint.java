@@ -6,26 +6,26 @@ import java.util.*;
 import beatrice.analysis.*;
 
 @SuppressWarnings("nls")
-public final class APrint extends PPrint
+public final class ASequencePrint extends PPrint
 {
     private TEcriture _ecriture_;
-    private TIdentifiant _identifiant_;
+    private PMessageAdd _messageAdd_;
     private final LinkedList<PMessage> _message_ = new LinkedList<PMessage>();
 
-    public APrint()
+    public ASequencePrint()
     {
         // Constructor
     }
 
-    public APrint(
+    public ASequencePrint(
         @SuppressWarnings("hiding") TEcriture _ecriture_,
-        @SuppressWarnings("hiding") TIdentifiant _identifiant_,
+        @SuppressWarnings("hiding") PMessageAdd _messageAdd_,
         @SuppressWarnings("hiding") List<?> _message_)
     {
         // Constructor
         setEcriture(_ecriture_);
 
-        setIdentifiant(_identifiant_);
+        setMessageAdd(_messageAdd_);
 
         setMessage(_message_);
 
@@ -34,16 +34,16 @@ public final class APrint extends PPrint
     @Override
     public Object clone()
     {
-        return new APrint(
+        return new ASequencePrint(
             cloneNode(this._ecriture_),
-            cloneNode(this._identifiant_),
+            cloneNode(this._messageAdd_),
             cloneList(this._message_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAPrint(this);
+        ((Analysis) sw).caseASequencePrint(this);
     }
 
     public TEcriture getEcriture()
@@ -71,16 +71,16 @@ public final class APrint extends PPrint
         this._ecriture_ = node;
     }
 
-    public TIdentifiant getIdentifiant()
+    public PMessageAdd getMessageAdd()
     {
-        return this._identifiant_;
+        return this._messageAdd_;
     }
 
-    public void setIdentifiant(TIdentifiant node)
+    public void setMessageAdd(PMessageAdd node)
     {
-        if(this._identifiant_ != null)
+        if(this._messageAdd_ != null)
         {
-            this._identifiant_.parent(null);
+            this._messageAdd_.parent(null);
         }
 
         if(node != null)
@@ -93,7 +93,7 @@ public final class APrint extends PPrint
             node.parent(this);
         }
 
-        this._identifiant_ = node;
+        this._messageAdd_ = node;
     }
 
     public LinkedList<PMessage> getMessage()
@@ -127,7 +127,7 @@ public final class APrint extends PPrint
     {
         return ""
             + toString(this._ecriture_)
-            + toString(this._identifiant_)
+            + toString(this._messageAdd_)
             + toString(this._message_);
     }
 
@@ -141,9 +141,9 @@ public final class APrint extends PPrint
             return;
         }
 
-        if(this._identifiant_ == child)
+        if(this._messageAdd_ == child)
         {
-            this._identifiant_ = null;
+            this._messageAdd_ = null;
             return;
         }
 
@@ -165,9 +165,9 @@ public final class APrint extends PPrint
             return;
         }
 
-        if(this._identifiant_ == oldChild)
+        if(this._messageAdd_ == oldChild)
         {
-            setIdentifiant((TIdentifiant) newChild);
+            setMessageAdd((PMessageAdd) newChild);
             return;
         }
 

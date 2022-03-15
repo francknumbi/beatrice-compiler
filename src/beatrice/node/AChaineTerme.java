@@ -5,46 +5,46 @@ package beatrice.node;
 import beatrice.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AValeurTerme extends PTerme
+public final class AChaineTerme extends PTerme
 {
-    private TNumerique _numerique_;
+    private TCaracteres _caracteres_;
 
-    public AValeurTerme()
+    public AChaineTerme()
     {
         // Constructor
     }
 
-    public AValeurTerme(
-        @SuppressWarnings("hiding") TNumerique _numerique_)
+    public AChaineTerme(
+        @SuppressWarnings("hiding") TCaracteres _caracteres_)
     {
         // Constructor
-        setNumerique(_numerique_);
+        setCaracteres(_caracteres_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AValeurTerme(
-            cloneNode(this._numerique_));
+        return new AChaineTerme(
+            cloneNode(this._caracteres_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAValeurTerme(this);
+        ((Analysis) sw).caseAChaineTerme(this);
     }
 
-    public TNumerique getNumerique()
+    public TCaracteres getCaracteres()
     {
-        return this._numerique_;
+        return this._caracteres_;
     }
 
-    public void setNumerique(TNumerique node)
+    public void setCaracteres(TCaracteres node)
     {
-        if(this._numerique_ != null)
+        if(this._caracteres_ != null)
         {
-            this._numerique_.parent(null);
+            this._caracteres_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AValeurTerme extends PTerme
             node.parent(this);
         }
 
-        this._numerique_ = node;
+        this._caracteres_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._numerique_);
+            + toString(this._caracteres_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._numerique_ == child)
+        if(this._caracteres_ == child)
         {
-            this._numerique_ = null;
+            this._caracteres_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AValeurTerme extends PTerme
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._numerique_ == oldChild)
+        if(this._caracteres_ == oldChild)
         {
-            setNumerique((TNumerique) newChild);
+            setCaracteres((TCaracteres) newChild);
             return;
         }
 

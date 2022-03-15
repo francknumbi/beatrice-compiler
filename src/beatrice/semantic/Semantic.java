@@ -3,14 +3,17 @@ package beatrice.semantic;
 import beatrice.analysis.DepthFirstAdapter;
 import beatrice.node.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class Semantic extends DepthFirstAdapter {
 
     HashMap<String,String> table_symboles = new HashMap<String,String>();
     ArrayList<String> listeVariables = new ArrayList<>();
-    String typePremierVariable = null;
+    String  identifiantCourant =null;
     /*
     Parcours de l arbre contenant les variables
      */
@@ -56,7 +59,14 @@ public class Semantic extends DepthFirstAdapter {
      */
     public void outASequenceVariableDeclaration(ASequenceVariableDeclaration node)
     {
-        System.out.println(node.getIdentifiant());
+        String chaine = node.getDefAdd().toString();
+        String[] types = new String[]{"entier","reel","caracteres","byte"};
+        HashMap<Integer,Integer> valeurs= new HashMap<>();
+        int[] indices = new int[4];
+        int indicePlusPetit =0;
+        int i =0;
+        int plusPetitIndex;
+
         if(table_symboles.containsKey(node.getIdentifiant().getText()))
         {
             System.out.println("ERREUR DE DECLARATION LA VARIABLE" );
@@ -64,11 +74,40 @@ public class Semantic extends DepthFirstAdapter {
         }
         if (node.getSuffixe()!=null)
             table_symboles.put(node.getIdentifiant().getText(),node.getSuffixe().toString());
+        else
+        {
+            for (String type : types) {
+                if(chaine.indexOf(type) > 0)
+                {
+                    valeurs.put(i,chaine.indexOf(type));
+                    i++;
+                }
+            }
+            System.out.println(valeurs);
+            i =0;
+            for (Map.Entry index : valeurs.entrySet())
+            {
+                indices[i] = (Integer) index.getValue();
+                i+=1;
+            }
+            plusPetitIndex = indices[0];
+            i =0;
+            for (; i < valeurs.size(); i++)
+            {
+                if (indices[i] < plusPetitIndex)
+                {
+                    plusPetitIndex = indices[i];
+                    indicePlusPetit +=1;
+                }
+            }
+            table_symboles.put(node.getIdentifiant().getText(),types[indicePlusPetit]);
+        }
         System.out.println(table_symboles);
     }
-
-
-
+    public void inAAffectation(AAffectation node)
+    {
+        identifiantCourant = node.getIdentifiant().getText();
+    }
     public void outAAffectation(AAffectation node)
     {
         /*
@@ -76,9 +115,10 @@ public class Semantic extends DepthFirstAdapter {
      */
         String identifiantAffectation = node.getIdentifiant().getText();
         if (!table_symboles.containsKey(identifiantAffectation)){
-            System.out.println("Erreur d initialisation "+ node.getIdentifiant().toString()+"N EST PAS DECLAREE");
+            System.out.println("Erreur d initialisation "+ node.getIdentifiant().getText()+"N EST PAS DECLAREE");
             System.exit(0);
         }
+        //identifiantCourant =null;
 
     }
      /*
@@ -94,28 +134,7 @@ public class Semantic extends DepthFirstAdapter {
         }
 
     }
-     /*
-     verifier que l identifiant dans l ecriture (Print) a ete declare avant son utilisation
-      */
-     public void outAPrint(APrint node)
-     {
-         String identifiantEcriture = node.getIdentifiant().getText();
-         if (!table_symboles.containsKey(identifiantEcriture)){
-             System.out.println("Erreur : la variable" +identifiantEcriture +" n est pas declaree");
-             System.exit(0);
-         }
-     }
-    /*
-        verifier que l identifiant dans l affichage [Sequence] a ete declare avant son utilisation
-    */
-    public void outASequenceMessage(ASequenceMessage node)
-    {
-        String idenfiantEcritureSequence = node.getIdentifiant().getText();
-        if (!table_symboles.containsKey(idenfiantEcritureSequence)){
-            System.out.println("Erreur : la variable " +idenfiantEcritureSequence +" n est pas declaree");
-            System.exit(0);
-        }
-    }
+
     /*
         verifier que l identifiant dans l affichage [message_Add] a ete declare avant son utilisation
     */
@@ -145,6 +164,30 @@ public class Semantic extends DepthFirstAdapter {
     Vefication des types dans les operations d affectations et arithmetiques
      */
 
+    public void outAValeurEntiereTerme(AValeurEntiereTerme node)
+    {
+        String valeurEntiere = node.getClass().getSimpleName();
+        String type = table_symboles.get(identifiantCourant);
+        if(type != "entier" | type !="en entier" ){
+
+        }
+        System.out.println(valeurEntiere);
+        System.out.println(type);
+    }
+
+    public void inAValeurReelTerme(AValeurReelTerme node)
+    {
+        String type = table_symboles.get(identifiantCourant);
+        if(type != "reel" || type != "en reel" )
+        {
+            System.out.println("Erreur : types non compatibles " + identifiantCourant);
+            System.exit(0);
+        }
+    }
+    public void outAAlgorithmeProgramme(AAlgorithmeProgramme node)
+    {
+        System.out.println(table_symboles);
+    }
 
 
 }

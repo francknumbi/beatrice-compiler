@@ -3,8 +3,7 @@ Package beatrice;
 Helpers
 	signes = '+'|'-';
 	chiffre = ['0'..'9'];
-	nombre_entier = chiffre+;
-	nombre_reel = chiffre+ '.' chiffre+;
+	
 	//valeur_byte = ['0'..'255'];
 	lettre = ['a'..'z'];
 	lettres = lettre+;
@@ -30,7 +29,8 @@ Tokens
 	sinonsi = 'sinonsi';
 	alors = 'alors';
 	finsi = 'finsi';
-	numerique = nombre_entier | nombre_reel;
+	nombre_entier = chiffre+;
+	nombre_reel = chiffre+ '.' chiffre+;
 	caractere = 'caractere';
 	caracteres = '"tout_caractere"';
 	identifiant = lettres|lettre ; //underscore? ((lettre*|chiffre*)|(chiffre*|lettre*));
@@ -119,19 +119,21 @@ Productions
 			
 
 	terme = 
-			{valeur} numerique | 
+			{valeur_entiere} nombre_entier |
+			{valeur_reel} nombre_reel |
 			{identifiant} identifiant |
+			{chaine} caracteres |
 			{parentheses} parenthese_o express parenthese_f;
 
 	input = 
 			T.lecture identifiant prefixe*;
 
 	print = 
-			T.ecriture identifiant message+|
+			{sequence} T.ecriture message_add message+|
 			{single}T.ecriture message_add;
 
 	message =
-			{sequence} [gauche]: concat caracteres [droite]: concat identifiant;
+			concat message_add;
 
 	message_add = 
 			identifiant |

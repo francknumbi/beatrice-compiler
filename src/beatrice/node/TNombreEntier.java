@@ -5,14 +5,14 @@ package beatrice.node;
 import beatrice.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TNumerique extends Token
+public final class TNombreEntier extends Token
 {
-    public TNumerique(String text)
+    public TNombreEntier(String text)
     {
         setText(text);
     }
 
-    public TNumerique(String text, int line, int pos)
+    public TNombreEntier(String text, int line, int pos)
     {
         setText(text);
         setLine(line);
@@ -22,12 +22,12 @@ public final class TNumerique extends Token
     @Override
     public Object clone()
     {
-      return new TNumerique(getText(), getLine(), getPos());
+      return new TNombreEntier(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTNumerique(this);
+        ((Analysis) sw).caseTNombreEntier(this);
     }
 }

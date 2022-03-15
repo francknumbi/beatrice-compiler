@@ -38,13 +38,15 @@ public interface Analysis extends Switch
     void caseADivisionFacteur(ADivisionFacteur node);
     void caseAModuloFacteur(AModuloFacteur node);
     void caseAPuissanceFacteur(APuissanceFacteur node);
-    void caseAValeurTerme(AValeurTerme node);
+    void caseAValeurEntiereTerme(AValeurEntiereTerme node);
+    void caseAValeurReelTerme(AValeurReelTerme node);
     void caseAIdentifiantTerme(AIdentifiantTerme node);
+    void caseAChaineTerme(AChaineTerme node);
     void caseAParenthesesTerme(AParenthesesTerme node);
     void caseAInput(AInput node);
-    void caseAPrint(APrint node);
+    void caseASequencePrint(ASequencePrint node);
     void caseASinglePrint(ASinglePrint node);
-    void caseASequenceMessage(ASequenceMessage node);
+    void caseAMessage(AMessage node);
     void caseAMessageAdd(AMessageAdd node);
     void caseAChaineMessageAdd(AChaineMessageAdd node);
     void caseASimpleStructureConditionnelle(ASimpleStructureConditionnelle node);
@@ -84,7 +86,8 @@ public interface Analysis extends Switch
     void caseTSinonsi(TSinonsi node);
     void caseTAlors(TAlors node);
     void caseTFinsi(TFinsi node);
-    void caseTNumerique(TNumerique node);
+    void caseTNombreEntier(TNombreEntier node);
+    void caseTNombreReel(TNombreReel node);
     void caseTCaractere(TCaractere node);
     void caseTCaracteres(TCaracteres node);
     void caseTIdentifiant(TIdentifiant node);

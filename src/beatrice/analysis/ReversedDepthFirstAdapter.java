@@ -686,25 +686,46 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAPuissanceFacteur(node);
     }
 
-    public void inAValeurTerme(AValeurTerme node)
+    public void inAValeurEntiereTerme(AValeurEntiereTerme node)
     {
         defaultIn(node);
     }
 
-    public void outAValeurTerme(AValeurTerme node)
+    public void outAValeurEntiereTerme(AValeurEntiereTerme node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAValeurTerme(AValeurTerme node)
+    public void caseAValeurEntiereTerme(AValeurEntiereTerme node)
     {
-        inAValeurTerme(node);
-        if(node.getNumerique() != null)
+        inAValeurEntiereTerme(node);
+        if(node.getNombreEntier() != null)
         {
-            node.getNumerique().apply(this);
+            node.getNombreEntier().apply(this);
         }
-        outAValeurTerme(node);
+        outAValeurEntiereTerme(node);
+    }
+
+    public void inAValeurReelTerme(AValeurReelTerme node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAValeurReelTerme(AValeurReelTerme node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAValeurReelTerme(AValeurReelTerme node)
+    {
+        inAValeurReelTerme(node);
+        if(node.getNombreReel() != null)
+        {
+            node.getNombreReel().apply(this);
+        }
+        outAValeurReelTerme(node);
     }
 
     public void inAIdentifiantTerme(AIdentifiantTerme node)
@@ -726,6 +747,27 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getIdentifiant().apply(this);
         }
         outAIdentifiantTerme(node);
+    }
+
+    public void inAChaineTerme(AChaineTerme node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAChaineTerme(AChaineTerme node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAChaineTerme(AChaineTerme node)
+    {
+        inAChaineTerme(node);
+        if(node.getCaracteres() != null)
+        {
+            node.getCaracteres().apply(this);
+        }
+        outAChaineTerme(node);
     }
 
     public void inAParenthesesTerme(AParenthesesTerme node)
@@ -790,20 +832,20 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAInput(node);
     }
 
-    public void inAPrint(APrint node)
+    public void inASequencePrint(ASequencePrint node)
     {
         defaultIn(node);
     }
 
-    public void outAPrint(APrint node)
+    public void outASequencePrint(ASequencePrint node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAPrint(APrint node)
+    public void caseASequencePrint(ASequencePrint node)
     {
-        inAPrint(node);
+        inASequencePrint(node);
         {
             List<PMessage> copy = new ArrayList<PMessage>(node.getMessage());
             Collections.reverse(copy);
@@ -812,15 +854,15 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
                 e.apply(this);
             }
         }
-        if(node.getIdentifiant() != null)
+        if(node.getMessageAdd() != null)
         {
-            node.getIdentifiant().apply(this);
+            node.getMessageAdd().apply(this);
         }
         if(node.getEcriture() != null)
         {
             node.getEcriture().apply(this);
         }
-        outAPrint(node);
+        outASequencePrint(node);
     }
 
     public void inASinglePrint(ASinglePrint node)
@@ -848,37 +890,29 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outASinglePrint(node);
     }
 
-    public void inASequenceMessage(ASequenceMessage node)
+    public void inAMessage(AMessage node)
     {
         defaultIn(node);
     }
 
-    public void outASequenceMessage(ASequenceMessage node)
+    public void outAMessage(AMessage node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseASequenceMessage(ASequenceMessage node)
+    public void caseAMessage(AMessage node)
     {
-        inASequenceMessage(node);
-        if(node.getIdentifiant() != null)
+        inAMessage(node);
+        if(node.getMessageAdd() != null)
         {
-            node.getIdentifiant().apply(this);
+            node.getMessageAdd().apply(this);
         }
-        if(node.getDroite() != null)
+        if(node.getConcat() != null)
         {
-            node.getDroite().apply(this);
+            node.getConcat().apply(this);
         }
-        if(node.getCaracteres() != null)
-        {
-            node.getCaracteres().apply(this);
-        }
-        if(node.getGauche() != null)
-        {
-            node.getGauche().apply(this);
-        }
-        outASequenceMessage(node);
+        outAMessage(node);
     }
 
     public void inAMessageAdd(AMessageAdd node)
