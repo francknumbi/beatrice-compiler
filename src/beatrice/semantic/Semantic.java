@@ -19,7 +19,6 @@ public class Semantic extends DepthFirstAdapter {
      */
    public void outAPrefixe(APrefixe node)
    {
-       System.out.println(node.getIdentifiant());
        String identifiant = node.getIdentifiant().getText();
        listeVariables.add(identifiant);
    }
@@ -51,7 +50,6 @@ public class Semantic extends DepthFirstAdapter {
                 table_symboles.put(listeVariables.get(0),type);
         }
         listeVariables.clear();
-        System.out.println(node.getType());
     }
     /*
     verification sur la premiere variable afin de savoir si cette derniere n a pas ete declare
@@ -61,8 +59,7 @@ public class Semantic extends DepthFirstAdapter {
     {
         String chaine = node.getDefAdd().toString();
         String[] types = new String[]{"entier","reel","caracteres","byte"};
-        HashMap<Integer,Integer> valeurs= new HashMap<>();
-        int[] indices = new int[4];
+        ArrayList<Integer> list = new ArrayList<>();
         int indicePlusPetit =0;
         int i =0;
         int plusPetitIndex;
@@ -79,30 +76,20 @@ public class Semantic extends DepthFirstAdapter {
             for (String type : types) {
                 if(chaine.indexOf(type) > 0)
                 {
-                    valeurs.put(i,chaine.indexOf(type));
-                    i++;
+                    list.add(i,chaine.indexOf(type));
                 }
             }
-            System.out.println(valeurs);
-            i =0;
-            for (Map.Entry index : valeurs.entrySet())
+            plusPetitIndex = list.get(0);
+            for (; i < list.size(); i++)
             {
-                indices[i] = (Integer) index.getValue();
-                i+=1;
-            }
-            plusPetitIndex = indices[0];
-            i =0;
-            for (; i < valeurs.size(); i++)
-            {
-                if (indices[i] < plusPetitIndex)
+                if (list.get(i) < plusPetitIndex)
                 {
-                    plusPetitIndex = indices[i];
+                    plusPetitIndex = list.get(i);
                     indicePlusPetit +=1;
                 }
             }
             table_symboles.put(node.getIdentifiant().getText(),types[indicePlusPetit]);
         }
-        System.out.println(table_symboles);
     }
     public void inAAffectation(AAffectation node)
     {
