@@ -7,14 +7,14 @@ import beatrice.analysis.*;
 @SuppressWarnings("nls")
 public final class TCaracteres extends Token
 {
-    public TCaracteres()
+    public TCaracteres(String text)
     {
-        super.setText("\"tout_caractere\"");
+        setText(text);
     }
 
-    public TCaracteres(int line, int pos)
+    public TCaracteres(String text, int line, int pos)
     {
-        super.setText("\"tout_caractere\"");
+        setText(text);
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,12 @@ public final class TCaracteres extends Token
     @Override
     public Object clone()
     {
-      return new TCaracteres(getLine(), getPos());
+      return new TCaracteres(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseTCaracteres(this);
-    }
-
-    @Override
-    public void setText(@SuppressWarnings("unused") String text)
-    {
-        throw new RuntimeException("Cannot change TCaracteres text.");
     }
 }

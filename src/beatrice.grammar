@@ -3,7 +3,7 @@ Package beatrice;
 Helpers
 	signes = '+'|'-';
 	chiffre = ['0'..'9'];
-	
+	all_caractere =[0 .. 65535];
 	//valeur_byte = ['0'..'255'];
 	lettre = ['a'..'z'];
 	lettres = lettre+;
@@ -32,7 +32,7 @@ Tokens
 	nombre_entier = chiffre+;
 	nombre_reel = chiffre+ '.' chiffre+;
 	caractere = 'caractere';
-	caracteres = '"tout_caractere"';
+	caracteres = '"'lettres'"';
 	identifiant = lettres|lettre ; //underscore? ((lettre*|chiffre*)|(chiffre*|lettre*));
 	moins = '-';
 	plus = '+';

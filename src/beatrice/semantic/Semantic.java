@@ -58,8 +58,9 @@ public class Semantic extends DepthFirstAdapter {
     public void outASequenceVariableDeclaration(ASequenceVariableDeclaration node)
     {
         String chaine = node.getDefAdd().toString();
-        String[] types = new String[]{"entier","reel","caracteres","byte"};
-        ArrayList<Integer> list = new ArrayList<>();
+        String[] types = new String[]{"entier","reel","caractere","byte"};
+        HashMap<Integer,Integer> list = new HashMap<>();
+        ArrayList<Integer> indices = new ArrayList<>();
         int indicePlusPetit =0;
         int i =0;
         int plusPetitIndex;
@@ -70,25 +71,53 @@ public class Semantic extends DepthFirstAdapter {
             System.exit(0);
         }
         if (node.getSuffixe()!=null)
-            table_symboles.put(node.getIdentifiant().getText(),node.getSuffixe().toString());
+        {
+            for (String type: types) {
+                if(node.getSuffixe().toString().indexOf(type) > 0){
+                    break;
+                }
+                i+=1;
+            }
+            table_symboles.put(node.getIdentifiant().getText(), types[i]);
+        }
         else
         {
+            System.out.println("TYPE : "+node.getSuffixe());
+            System.out.println(chaine);
             for (String type : types) {
-                if(chaine.indexOf(type) > 0)
+
+                if (chaine.indexOf(type) > 0){
+                    list.put(i,chaine.indexOf(type));
+                }
+                i+=1;
+            }
+            for (Map.Entry<Integer, Integer> indice: list.entrySet()
+            ) {
+                indices.add(indice.getKey());
+            }
+            i=0;
+
+            if(list.size() > 1){
+                plusPetitIndex = list.get(indices.get(0));
+                for (Integer valeur : indices)
                 {
-                    list.add(i,chaine.indexOf(type));
+                    if (list.get(valeur) < plusPetitIndex)
+                    {
+
+                        plusPetitIndex = list.get(valeur);
+                        indicePlusPetit = valeur;
+                        System.out.println(plusPetitIndex);
+                    }
+
+                    i++;
                 }
             }
-            plusPetitIndex = list.get(0);
-            for (; i < list.size(); i++)
-            {
-                if (list.get(i) < plusPetitIndex)
-                {
-                    plusPetitIndex = list.get(i);
-                    indicePlusPetit +=1;
-                }
-            }
+            else
+                indicePlusPetit = indices.get(0);
+
             table_symboles.put(node.getIdentifiant().getText(),types[indicePlusPetit]);
+            System.out.println(table_symboles);
+
         }
     }
     public void inAAffectation(AAffectation node)
@@ -105,7 +134,7 @@ public class Semantic extends DepthFirstAdapter {
             System.out.println("Erreur d initialisation "+ node.getIdentifiant().getText()+"N EST PAS DECLAREE");
             System.exit(0);
         }
-        //identifiantCourant =null;
+        identifiantCourant =null;
 
     }
      /*
@@ -151,26 +180,29 @@ public class Semantic extends DepthFirstAdapter {
     Vefication des types dans les operations d affectations et arithmetiques
      */
 
-    public void outAValeurEntiereTerme(AValeurEntiereTerme node)
-    {
-        String valeurEntiere = node.getClass().getSimpleName();
-        String type = table_symboles.get(identifiantCourant);
-        if(type != "entier" | type !="en entier" ){
-
-        }
-        System.out.println(valeurEntiere);
-        System.out.println(type);
-    }
-
     public void inAValeurReelTerme(AValeurReelTerme node)
     {
+        System.out.println(table_symboles);
         String type = table_symboles.get(identifiantCourant);
-        if(type != "reel" || type != "en reel" )
+        System.out.println(type);
+        if(type != "reel")
         {
             System.out.println("Erreur : types non compatibles " + identifiantCourant);
             System.exit(0);
         }
     }
+
+    public void outAChaineTerme(AChaineTerme node)
+    {
+        String type = table_symboles.get(identifiantCourant);
+        System.out.println(type);
+        if(type != "caractere")
+        {
+            System.out.println("Erreur : types non compatibles " + identifiantCourant);
+            System.exit(0);
+        }
+    }
+
     public void outAAlgorithmeProgramme(AAlgorithmeProgramme node)
     {
         System.out.println(table_symboles);
