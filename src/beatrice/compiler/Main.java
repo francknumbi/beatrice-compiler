@@ -23,5 +23,9 @@ public class Main {
         Parser syntaxique = new Parser(lexical);
         Start arbre = syntaxique.parse();
         arbre.apply(new Semantic());
+        String x = "caractere";
+        if (x.equals("caractere")){
+            System.out.println("caractereeeeeeeeeee");
+        }
     }
 }

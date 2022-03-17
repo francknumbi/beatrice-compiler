@@ -767,6 +767,34 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAChaineTerme(node);
     }
 
+    public void inATerme(ATerme node)
+    {
+        defaultIn(node);
+    }
+
+    public void outATerme(ATerme node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseATerme(ATerme node)
+    {
+        inATerme(node);
+        if(node.getMessageAdd() != null)
+        {
+            node.getMessageAdd().apply(this);
+        }
+        {
+            List<PMessage> copy = new ArrayList<PMessage>(node.getMessage());
+            for(PMessage e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outATerme(node);
+    }
+
     public void inAParenthesesTerme(AParenthesesTerme node)
     {
         defaultIn(node);

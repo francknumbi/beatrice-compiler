@@ -82,42 +82,31 @@ public class Semantic extends DepthFirstAdapter {
         }
         else
         {
-            System.out.println("TYPE : "+node.getSuffixe());
             System.out.println(chaine);
             for (String type : types) {
-
-                if (chaine.indexOf(type) > 0){
+                if (chaine.indexOf(type) > 0)
                     list.put(i,chaine.indexOf(type));
-                }
                 i+=1;
             }
             for (Map.Entry<Integer, Integer> indice: list.entrySet()
             ) {
                 indices.add(indice.getKey());
             }
-            i=0;
-
             if(list.size() > 1){
                 plusPetitIndex = list.get(indices.get(0));
                 for (Integer valeur : indices)
                 {
                     if (list.get(valeur) < plusPetitIndex)
                     {
-
                         plusPetitIndex = list.get(valeur);
                         indicePlusPetit = valeur;
                         System.out.println(plusPetitIndex);
                     }
-
-                    i++;
                 }
             }
             else
                 indicePlusPetit = indices.get(0);
-
             table_symboles.put(node.getIdentifiant().getText(),types[indicePlusPetit]);
-            System.out.println(table_symboles);
-
         }
     }
     public void inAAffectation(AAffectation node)
@@ -148,6 +137,39 @@ public class Semantic extends DepthFirstAdapter {
             System.out.println("Erreur : la variable " + node.getIdentifiant().getText() +" n est pas declaree");
             System.exit(0);
         }
+        /*
+            verification de compatibilites de types pour les identifiants pendant l affectation
+      */
+        String typeIdentifiantCourant = table_symboles.get(identifiantCourant);
+        String typeIdendentifiantNoeud = table_symboles.get(identifiantExpression);
+        switch (typeIdentifiantCourant)
+        {
+            case "entier":
+                if(!typeIdentifiantCourant.equals(typeIdendentifiantNoeud))
+                {
+                    System.out.println("Erreur : types non compatibles " + node.getIdentifiant().getText());
+                    System.exit(0);
+                }
+                break;
+            case  "reel" :
+                if(typeIdendentifiantNoeud.equals("caractere"))
+                {
+                    System.out.println("Erreur : types non compatibles " + node.getIdentifiant().getText());
+                    System.exit(0);
+                }
+                break;
+            case "caractere" :
+                if(!typeIdentifiantCourant.equals(typeIdendentifiantNoeud))
+                {
+                    System.out.println("Erreur : types non compatibles " + identifiantCourant);
+                    System.exit(0);
+                }
+                break;
+            case "byte" :
+
+                break;
+        }
+
 
     }
 
@@ -162,7 +184,6 @@ public class Semantic extends DepthFirstAdapter {
             System.exit(0);
         }
     }
-
     /*
     verifier que l identifiant dans la lecture a ete declare avant son utilisation
      */
@@ -173,36 +194,41 @@ public class Semantic extends DepthFirstAdapter {
             System.out.println("Erreur : la variable" +identifiantLecture +" n est pas declaree");
             System.exit(0);
         }
-
     }
 
     /*
     Vefication des types dans les operations d affectations et arithmetiques
      */
-
+    public void outAValeurEntiereTerme(AValeurEntiereTerme node)
+    {
+        String type = table_symboles.get(identifiantCourant);
+        System.out.println(type);
+        if(type.equals("caractere"))
+        {
+            System.out.println("Erreur : types non compatibles " + identifiantCourant);
+            System.exit(0);
+        }
+    }
     public void inAValeurReelTerme(AValeurReelTerme node)
     {
         System.out.println(table_symboles);
         String type = table_symboles.get(identifiantCourant);
         System.out.println(type);
-        if(type != "reel")
+        if(!type.equals("reel"))
         {
             System.out.println("Erreur : types non compatibles " + identifiantCourant);
             System.exit(0);
         }
     }
-
     public void outAChaineTerme(AChaineTerme node)
     {
         String type = table_symboles.get(identifiantCourant);
-        System.out.println(type);
-        if(type != "caractere")
+        if(!type.equals("caractere"))
         {
-            System.out.println("Erreur : types non compatibles " + identifiantCourant);
+            System.out.println("Erreur h : types non compatibles " + identifiantCourant);
             System.exit(0);
         }
     }
-
     public void outAAlgorithmeProgramme(AAlgorithmeProgramme node)
     {
         System.out.println(table_symboles);

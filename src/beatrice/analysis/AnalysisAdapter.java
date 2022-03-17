@@ -255,6 +255,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseATerme(ATerme node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAParenthesesTerme(AParenthesesTerme node)
     {
         defaultCase(node);

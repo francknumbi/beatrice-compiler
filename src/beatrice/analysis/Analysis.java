@@ -42,6 +42,7 @@ public interface Analysis extends Switch
     void caseAValeurReelTerme(AValeurReelTerme node);
     void caseAIdentifiantTerme(AIdentifiantTerme node);
     void caseAChaineTerme(AChaineTerme node);
+    void caseATerme(ATerme node);
     void caseAParenthesesTerme(AParenthesesTerme node);
     void caseAInput(AInput node);
     void caseASequencePrint(ASequencePrint node);
