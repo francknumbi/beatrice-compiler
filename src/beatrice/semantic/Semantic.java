@@ -15,6 +15,7 @@ public class Semantic extends DepthFirstAdapter {
     private ArrayList<String> listeVariables = new ArrayList<>();
     private String[] types = new String[]{"entier","reel","caractere","byte"};
     private String  identifiantCourant =null;
+    private ArrayList<String> tables_identifiants = new ArrayList<>();
     /*
     Parcours de l arbre contenant les variables
      */
@@ -135,6 +136,7 @@ public class Semantic extends DepthFirstAdapter {
             System.out.println("Erreur d initialisation "+ node.getIdentifiant().getText()+"N EST PAS DECLAREE");
             System.exit(0);
         }
+        tables_identifiants.add(identifiantAffectation);
         identifiantCourant =null;
 
     }
@@ -146,7 +148,12 @@ public class Semantic extends DepthFirstAdapter {
         String identifiantExpression = node.getIdentifiant().getText();
         if (!table_symboles.containsKey(identifiantExpression))
         {
-            System.out.println("Erreur : la variable " + node.getIdentifiant().getText() +" n est pas declaree");
+            System.out.println("Erreur : la variable " + node.getIdentifiant().getText() +" n est pas declarée");
+            System.exit(0);
+        }
+        if(!tables_identifiants.contains(identifiantExpression))
+        {
+            System.out.println("Erreur : la variable " + node.getIdentifiant().getText() +" n est pas initialisée");
             System.exit(0);
         }
         /*
