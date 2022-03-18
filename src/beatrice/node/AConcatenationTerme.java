@@ -6,17 +6,17 @@ import java.util.*;
 import beatrice.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ATerme extends PTerme
+public final class AConcatenationTerme extends PTerme
 {
     private PMessageAdd _messageAdd_;
     private final LinkedList<PMessage> _message_ = new LinkedList<PMessage>();
 
-    public ATerme()
+    public AConcatenationTerme()
     {
         // Constructor
     }
 
-    public ATerme(
+    public AConcatenationTerme(
         @SuppressWarnings("hiding") PMessageAdd _messageAdd_,
         @SuppressWarnings("hiding") List<?> _message_)
     {
@@ -30,7 +30,7 @@ public final class ATerme extends PTerme
     @Override
     public Object clone()
     {
-        return new ATerme(
+        return new AConcatenationTerme(
             cloneNode(this._messageAdd_),
             cloneList(this._message_));
     }
@@ -38,7 +38,7 @@ public final class ATerme extends PTerme
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseATerme(this);
+        ((Analysis) sw).caseAConcatenationTerme(this);
     }
 
     public PMessageAdd getMessageAdd()

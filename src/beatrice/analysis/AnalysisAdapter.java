@@ -255,7 +255,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseATerme(ATerme node)
+    public void caseAConcatenationTerme(AConcatenationTerme node)
     {
         defaultCase(node);
     }

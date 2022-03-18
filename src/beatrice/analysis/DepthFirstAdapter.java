@@ -767,20 +767,20 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAChaineTerme(node);
     }
 
-    public void inATerme(ATerme node)
+    public void inAConcatenationTerme(AConcatenationTerme node)
     {
         defaultIn(node);
     }
 
-    public void outATerme(ATerme node)
+    public void outAConcatenationTerme(AConcatenationTerme node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATerme(ATerme node)
+    public void caseAConcatenationTerme(AConcatenationTerme node)
     {
-        inATerme(node);
+        inAConcatenationTerme(node);
         if(node.getMessageAdd() != null)
         {
             node.getMessageAdd().apply(this);
@@ -792,7 +792,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
                 e.apply(this);
             }
         }
-        outATerme(node);
+        outAConcatenationTerme(node);
     }
 
     public void inAParenthesesTerme(AParenthesesTerme node)

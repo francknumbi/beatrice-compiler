@@ -390,7 +390,7 @@ public class Parser
                 push(goTo(12), list, false);
             }
             break;
-            case 32: /* reduce ATerme */
+            case 32: /* reduce AConcatenationTerme */
             {
                 ArrayList<Object> list = new32();
                 push(goTo(12), list, false);
@@ -1427,7 +1427,7 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new32() /* reduce ATerme */
+    ArrayList<Object> new32() /* reduce AConcatenationTerme */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
@@ -1449,7 +1449,7 @@ public class Parser
 	}
         }
 
-        ptermeNode1 = new ATerme(pmessageaddNode2, listNode4);
+        ptermeNode1 = new AConcatenationTerme(pmessageaddNode2, listNode4);
         }
 	nodeList.add(ptermeNode1);
         return nodeList;

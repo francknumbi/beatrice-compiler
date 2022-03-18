@@ -11,12 +11,24 @@ import java.util.Map;
 
 public class Semantic extends DepthFirstAdapter {
 
-    HashMap<String,String> table_symboles = new HashMap<String,String>();
-    ArrayList<String> listeVariables = new ArrayList<>();
-    String  identifiantCourant =null;
+    private HashMap<String,String> table_symboles = new HashMap<String,String>();
+    private ArrayList<String> listeVariables = new ArrayList<>();
+    private String[] types = new String[]{"entier","reel","caractere","byte"};
+    private String  identifiantCourant =null;
     /*
     Parcours de l arbre contenant les variables
      */
+    public void outASingleVariableDeclaration(ASingleVariableDeclaration node)
+    {
+        String identifiant = node.getIdentifiant().getText();
+        int i=0;
+        for (String type: types) {
+            if(node.getSuffixe().toString().indexOf(type) > 0)
+                break;
+            i+=1;
+        }
+        table_symboles.put(node.getIdentifiant().getText(), types[i]);
+    }
    public void outAPrefixe(APrefixe node)
    {
        String identifiant = node.getIdentifiant().getText();
@@ -37,7 +49,7 @@ public class Semantic extends DepthFirstAdapter {
                     System.exit(0);
                 }
                 else
-                    table_symboles.put(identifiant,type);
+                    table_symboles.put(identifiant,type).replaceAll(" ","");
             }
             System.out.println(table_symboles);
         }
@@ -58,7 +70,6 @@ public class Semantic extends DepthFirstAdapter {
     public void outASequenceVariableDeclaration(ASequenceVariableDeclaration node)
     {
         String chaine = node.getDefAdd().toString();
-        String[] types = new String[]{"entier","reel","caractere","byte"};
         HashMap<Integer,Integer> list = new HashMap<>();
         ArrayList<Integer> indices = new ArrayList<>();
         int indicePlusPetit =0;
@@ -106,7 +117,8 @@ public class Semantic extends DepthFirstAdapter {
             }
             else
                 indicePlusPetit = indices.get(0);
-            table_symboles.put(node.getIdentifiant().getText(),types[indicePlusPetit]);
+            table_symboles.put(node.getIdentifiant().getText().replaceAll(" ",""),
+                    types[indicePlusPetit].replaceAll(" ",""));
         }
     }
     public void inAAffectation(AAffectation node)
@@ -140,8 +152,8 @@ public class Semantic extends DepthFirstAdapter {
         /*
             verification de compatibilites de types pour les identifiants pendant l affectation
       */
-        String typeIdentifiantCourant = table_symboles.get(identifiantCourant);
-        String typeIdendentifiantNoeud = table_symboles.get(identifiantExpression);
+        String typeIdentifiantCourant = table_symboles.get(identifiantCourant).replaceAll(" ","");
+        String typeIdendentifiantNoeud = table_symboles.get(identifiantExpression).replaceAll(" ","");
         switch (typeIdentifiantCourant)
         {
             case "entier":
@@ -157,6 +169,7 @@ public class Semantic extends DepthFirstAdapter {
                     System.out.println("Erreur : types non compatibles " + node.getIdentifiant().getText());
                     System.exit(0);
                 }
+                System.out.println("SUccess");
                 break;
             case "caractere" :
                 if(!typeIdentifiantCourant.equals(typeIdendentifiantNoeud))
@@ -212,17 +225,20 @@ public class Semantic extends DepthFirstAdapter {
     public void inAValeurReelTerme(AValeurReelTerme node)
     {
         System.out.println(table_symboles);
-        String type = table_symboles.get(identifiantCourant);
-        System.out.println(type);
+        String type = table_symboles.get(identifiantCourant).replaceAll(" ","");
+        System.out.println(type.length());
+        System.out.println(type.equals("reel"));
         if(!type.equals("reel"))
         {
-            System.out.println("Erreur : types non compatibles " + identifiantCourant);
+            System.out.println("Erreur x: types non compatibles " + identifiantCourant);
             System.exit(0);
         }
     }
     public void outAChaineTerme(AChaineTerme node)
     {
-        String type = table_symboles.get(identifiantCourant);
+        String type = table_symboles.get(identifiantCourant).replaceAll(" ","");
+        System.out.println(type);
+        System.out.println();
         if(!type.equals("caractere"))
         {
             System.out.println("Erreur h : types non compatibles " + identifiantCourant);
@@ -233,6 +249,19 @@ public class Semantic extends DepthFirstAdapter {
     {
         System.out.println(table_symboles);
     }
+
+    public void outAConcatenationTerme(AConcatenationTerme node)
+    {
+        String type = table_symboles.get(identifiantCourant).replaceAll(" ","");
+        System.out.println(type);
+        System.out.println(type);
+        if(!type.equals("caractere"))
+        {
+            System.out.println("Erreur h : types non compatibles " + identifiantCourant);
+            System.exit(0);
+        }
+    }
+
 
 
 }

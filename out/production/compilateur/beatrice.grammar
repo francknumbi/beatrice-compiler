@@ -123,7 +123,7 @@ Productions
 			{valeur_reel} nombre_reel |
 			{identifiant} identifiant |
 			{chaine} caracteres |
-			message_add message+ |
+			{concatenation} message_add message+ |
 			{parentheses} parenthese_o express parenthese_f;
 
 	input = 
