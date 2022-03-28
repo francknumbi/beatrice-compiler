@@ -30,17 +30,17 @@ public class Semantic extends DepthFirstAdapter {
         }
         table_symboles.put(node.getIdentifiant().getText(), types[i]);
     }
-   public void outAPrefixe(APrefixe node)
-   {
-       String identifiant = node.getIdentifiant().getText();
-       listeVariables.add(identifiant);
-   }
-   public void outASuffixe(ASuffixe node)
-   {
-       /*
-       * initialisation du tableau des symboles des informations necessaire
-       * concernants les identifiants
-       * */
+    public void outAPrefixe(APrefixe node)
+    {
+        String identifiant = node.getIdentifiant().getText();
+        listeVariables.add(identifiant);
+    }
+    public void outASuffixe(ASuffixe node)
+    {
+        /*
+         * initialisation du tableau des symboles des informations necessaire
+         * concernants les identifiants
+         * */
         String type = node.getType().toString();
         if(listeVariables.size()>1){
             for (String identifiant: listeVariables
@@ -52,7 +52,6 @@ public class Semantic extends DepthFirstAdapter {
                 else
                     table_symboles.put(identifiant,type).replaceAll(" ","");
             }
-            System.out.println(table_symboles);
         }
         else if(listeVariables.size()==1){
             if (table_symboles.containsKey(listeVariables.get(0))){
@@ -75,7 +74,7 @@ public class Semantic extends DepthFirstAdapter {
         ArrayList<Integer> indices = new ArrayList<>();
         int indicePlusPetit =0;
         int i =0;
-        int plusPetitIndex;
+        int plusPetiteValeur;
 
         if(table_symboles.containsKey(node.getIdentifiant().getText()))
         {
@@ -96,30 +95,32 @@ public class Semantic extends DepthFirstAdapter {
         {
             System.out.println(chaine);
             for (String type : types) {
-                if (chaine.indexOf(type) > 0)
-                    list.put(i,chaine.indexOf(type));
+                if (chaine.indexOf(type) > 0) {
+                    list.put(i, chaine.indexOf(type));
+                }
                 i+=1;
             }
-            for (Map.Entry<Integer, Integer> indice: list.entrySet()
-            ) {
+            for (Map.Entry<Integer, Integer> indice: list.entrySet()) {
                 indices.add(indice.getKey());
             }
             if(list.size() > 1){
-                plusPetitIndex = list.get(indices.get(0));
-                for (Integer valeur : indices)
+
+                indicePlusPetit = indices.get(0);
+                plusPetiteValeur = list.get(indices.get(0));
+
+                for (Integer indice : indices)
                 {
-                    if (list.get(valeur) < plusPetitIndex)
+                    if (list.get(indice) < plusPetiteValeur)
                     {
-                        plusPetitIndex = list.get(valeur);
-                        indicePlusPetit = valeur;
-                        System.out.println(plusPetitIndex);
+                        plusPetiteValeur = list.get(indice);
+                        indicePlusPetit = indice;
                     }
                 }
             }
             else
                 indicePlusPetit = indices.get(0);
-            table_symboles.put(node.getIdentifiant().getText().replaceAll(" ",""),
-                    types[indicePlusPetit].replaceAll(" ",""));
+
+            table_symboles.put(node.getIdentifiant().getText().replaceAll(" ",""),types[indicePlusPetit]);
         }
     }
     public void inAAffectation(AAffectation node)
@@ -140,9 +141,9 @@ public class Semantic extends DepthFirstAdapter {
         identifiantCourant =null;
 
     }
-     /*
-     verifier que la variable dans l expression a ete declaree
-      */
+    /*
+    verifier que la variable dans l expression a ete declaree
+     */
     public void outAIdentifiantTerme(AIdentifiantTerme node)
     {
         String identifiantExpression = node.getIdentifiant().getText();
@@ -189,8 +190,6 @@ public class Semantic extends DepthFirstAdapter {
 
                 break;
         }
-
-
     }
 
     /*
@@ -215,14 +214,12 @@ public class Semantic extends DepthFirstAdapter {
             System.exit(0);
         }
     }
-
     /*
     Vefication des types dans les operations d affectations et arithmetiques
      */
     public void outAValeurEntiereTerme(AValeurEntiereTerme node)
     {
         String type = table_symboles.get(identifiantCourant);
-        System.out.println(type);
         if(type.equals("caractere"))
         {
             System.out.println("Erreur : types non compatibles " + identifiantCourant);
@@ -233,8 +230,6 @@ public class Semantic extends DepthFirstAdapter {
     {
         System.out.println(table_symboles);
         String type = table_symboles.get(identifiantCourant).replaceAll(" ","");
-        System.out.println(type.length());
-        System.out.println(type.equals("reel"));
         if(!type.equals("reel"))
         {
             System.out.println("Erreur x: types non compatibles " + identifiantCourant);
@@ -244,7 +239,6 @@ public class Semantic extends DepthFirstAdapter {
     public void outAChaineTerme(AChaineTerme node)
     {
         String type = table_symboles.get(identifiantCourant).replaceAll(" ","");
-        System.out.println(type);
         System.out.println();
         if(!type.equals("caractere"))
         {
