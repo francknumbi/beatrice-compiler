@@ -8,6 +8,7 @@ import beatrice.analysis.*;
 @SuppressWarnings("nls")
 public final class AAlgorithmeProgramme extends PProgramme
 {
+    private PNomAlgorithme _nomAlgorithme_;
     private PEntete _entete_;
     private TDebut _debut_;
     private final LinkedList<PInstructions> _instructions_ = new LinkedList<PInstructions>();
@@ -19,12 +20,15 @@ public final class AAlgorithmeProgramme extends PProgramme
     }
 
     public AAlgorithmeProgramme(
+        @SuppressWarnings("hiding") PNomAlgorithme _nomAlgorithme_,
         @SuppressWarnings("hiding") PEntete _entete_,
         @SuppressWarnings("hiding") TDebut _debut_,
         @SuppressWarnings("hiding") List<?> _instructions_,
         @SuppressWarnings("hiding") TFin _fin_)
     {
         // Constructor
+        setNomAlgorithme(_nomAlgorithme_);
+
         setEntete(_entete_);
 
         setDebut(_debut_);
@@ -39,6 +43,7 @@ public final class AAlgorithmeProgramme extends PProgramme
     public Object clone()
     {
         return new AAlgorithmeProgramme(
+            cloneNode(this._nomAlgorithme_),
             cloneNode(this._entete_),
             cloneNode(this._debut_),
             cloneList(this._instructions_),
@@ -49,6 +54,31 @@ public final class AAlgorithmeProgramme extends PProgramme
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAAlgorithmeProgramme(this);
+    }
+
+    public PNomAlgorithme getNomAlgorithme()
+    {
+        return this._nomAlgorithme_;
+    }
+
+    public void setNomAlgorithme(PNomAlgorithme node)
+    {
+        if(this._nomAlgorithme_ != null)
+        {
+            this._nomAlgorithme_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._nomAlgorithme_ = node;
     }
 
     public PEntete getEntete()
@@ -156,6 +186,7 @@ public final class AAlgorithmeProgramme extends PProgramme
     public String toString()
     {
         return ""
+            + toString(this._nomAlgorithme_)
             + toString(this._entete_)
             + toString(this._debut_)
             + toString(this._instructions_)
@@ -166,6 +197,12 @@ public final class AAlgorithmeProgramme extends PProgramme
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._nomAlgorithme_ == child)
+        {
+            this._nomAlgorithme_ = null;
+            return;
+        }
+
         if(this._entete_ == child)
         {
             this._entete_ = null;
@@ -196,6 +233,12 @@ public final class AAlgorithmeProgramme extends PProgramme
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._nomAlgorithme_ == oldChild)
+        {
+            setNomAlgorithme((PNomAlgorithme) newChild);
+            return;
+        }
+
         if(this._entete_ == oldChild)
         {
             setEntete((PEntete) newChild);

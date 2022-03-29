@@ -13,6 +13,7 @@ public interface Analysis extends Switch
 
     void caseStart(Start node);
     void caseAAlgorithmeProgramme(AAlgorithmeProgramme node);
+    void caseANomAlgorithme(ANomAlgorithme node);
     void caseAVideEntete(AVideEntete node);
     void caseADefinitionEntete(ADefinitionEntete node);
     void caseASingleVariableDeclaration(ASingleVariableDeclaration node);
@@ -71,6 +72,7 @@ public interface Analysis extends Switch
     void caseAOuConditionCompose(AOuConditionCompose node);
     void caseAConditionCompose(AConditionCompose node);
 
+    void caseTAlgorithme(TAlgorithme node);
     void caseTVariables(TVariables node);
     void caseTVariable(TVariable node);
     void caseTConst(TConst node);

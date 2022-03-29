@@ -70,7 +70,36 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getEntete().apply(this);
         }
+        if(node.getNomAlgorithme() != null)
+        {
+            node.getNomAlgorithme().apply(this);
+        }
         outAAlgorithmeProgramme(node);
+    }
+
+    public void inANomAlgorithme(ANomAlgorithme node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANomAlgorithme(ANomAlgorithme node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANomAlgorithme(ANomAlgorithme node)
+    {
+        inANomAlgorithme(node);
+        if(node.getIdentifiant() != null)
+        {
+            node.getIdentifiant().apply(this);
+        }
+        if(node.getAlgorithme() != null)
+        {
+            node.getAlgorithme().apply(this);
+        }
+        outANomAlgorithme(node);
     }
 
     public void inAVideEntete(AVideEntete node)

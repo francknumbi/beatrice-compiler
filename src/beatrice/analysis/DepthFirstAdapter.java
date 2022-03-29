@@ -50,6 +50,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAAlgorithmeProgramme(AAlgorithmeProgramme node)
     {
         inAAlgorithmeProgramme(node);
+        if(node.getNomAlgorithme() != null)
+        {
+            node.getNomAlgorithme().apply(this);
+        }
         if(node.getEntete() != null)
         {
             node.getEntete().apply(this);
@@ -70,6 +74,31 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getFin().apply(this);
         }
         outAAlgorithmeProgramme(node);
+    }
+
+    public void inANomAlgorithme(ANomAlgorithme node)
+    {
+        defaultIn(node);
+    }
+
+    public void outANomAlgorithme(ANomAlgorithme node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseANomAlgorithme(ANomAlgorithme node)
+    {
+        inANomAlgorithme(node);
+        if(node.getAlgorithme() != null)
+        {
+            node.getAlgorithme().apply(this);
+        }
+        if(node.getIdentifiant() != null)
+        {
+            node.getIdentifiant().apply(this);
+        }
+        outANomAlgorithme(node);
     }
 
     public void inAVideEntete(AVideEntete node)

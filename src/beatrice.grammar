@@ -13,6 +13,7 @@ Helpers
 
 Tokens
 
+	algorithme = 'algorithme';
 	variables = 'variables';
 	variable = 'variable';
 	const = 'const';
@@ -65,8 +66,13 @@ Ignored Tokens
 
 Productions
 
+	
+
 	programme = 
-		{algorithme} entete debut instructions* fin;
+		{algorithme} nom_algorithme entete debut instructions* fin;
+
+	nom_algorithme = 
+		algorithme identifiant;
 
 	entete = 
 		{vide} |

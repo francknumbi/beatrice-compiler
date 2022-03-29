@@ -81,6 +81,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseANomAlgorithme(ANomAlgorithme node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAVideEntete(AVideEntete node)
     {
         defaultCase(node);
@@ -418,6 +424,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAConditionCompose(AConditionCompose node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTAlgorithme(TAlgorithme node)
     {
         defaultCase(node);
     }

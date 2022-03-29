@@ -1,5 +1,6 @@
 package beatrice.compiler;
 
+import beatrice.codeGenerateur.CodeGenerateur;
 import beatrice.lexer.Lexer;
 import beatrice.lexer.LexerException;
 import beatrice.node.Start;
@@ -23,6 +24,7 @@ public class Main {
         Parser syntaxique = new Parser(lexical);
         Start arbre = syntaxique.parse();
         arbre.apply(new Semantic());
+        arbre.apply(new CodeGenerateur());
         System.out.println("Success");
     }
 }
