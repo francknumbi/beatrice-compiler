@@ -11,8 +11,11 @@ import beatrice.semantic.Semantic;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PushbackReader;
+import java.util.HashMap;
 
 public class Main {
+
+    public static HashMap<String,String> table_symboles = new HashMap<String,String>();
 
     public static void main(String[] args) throws ParserException, IOException, LexerException {
         System.out.println("hello");
@@ -25,6 +28,7 @@ public class Main {
         Start arbre = syntaxique.parse();
         arbre.apply(new Semantic());
         arbre.apply(new CodeGenerateur());
+        System.out.println(table_symboles);
         System.out.println("Success");
     }
 }

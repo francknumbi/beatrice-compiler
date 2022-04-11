@@ -133,11 +133,11 @@ Productions
 			{parentheses} parenthese_o express parenthese_f;
 
 	input = 
-			T.lecture identifiant prefixe*;
+			lecture identifiant prefixe*;
 
 	print = 
-			{sequence} T.ecriture message_add message+|
-			{single}T.ecriture message_add;
+			{sequence} ecriture message_add message+|
+			{single} ecriture message_add;
 
 	message =
 			concat message_add;

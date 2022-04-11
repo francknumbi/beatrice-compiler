@@ -1,13 +1,13 @@
 package beatrice.semantic;
 
 import beatrice.analysis.DepthFirstAdapter;
+import beatrice.compiler.Main;
 import beatrice.node.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.Map;
+import beatrice.compiler.Main;
 
 public class Semantic extends DepthFirstAdapter {
 
@@ -28,7 +28,9 @@ public class Semantic extends DepthFirstAdapter {
                 break;
             i+=1;
         }
-        table_symboles.put(node.getIdentifiant().getText(), types[i]);
+        String type = types[i].replaceAll("\\s*","");
+        identifiant = identifiant.replaceAll("\\s*","");
+        table_symboles.put(identifiant, type);
     }
     public void outAPrefixe(APrefixe node)
     {
@@ -50,7 +52,9 @@ public class Semantic extends DepthFirstAdapter {
                     System.exit(0);
                 }
                 else
-                    table_symboles.put(identifiant,type).replaceAll(" ","");
+                    identifiant = identifiant.replaceAll("\\s*","");
+                    type = type.replaceAll("\\s*","");
+                    table_symboles.put(identifiant,type);
             }
         }
         else if(listeVariables.size()==1){
@@ -59,7 +63,7 @@ public class Semantic extends DepthFirstAdapter {
                 System.exit(0);
             }
             else
-                table_symboles.put(listeVariables.get(0),type);
+                table_symboles.put(listeVariables.get(0).replaceAll("\\s*",""),type.replaceAll("\\s*",""));
         }
         listeVariables.clear();
     }
@@ -89,7 +93,10 @@ public class Semantic extends DepthFirstAdapter {
                 }
                 i+=1;
             }
-            table_symboles.put(node.getIdentifiant().getText(), types[i]);
+            String identifiant = node.getIdentifiant().getText().replaceAll("\\s*","");
+            String type = types[i].replaceAll("\\s*","");
+
+            table_symboles.put(identifiant, type);
         }
         else
         {
@@ -120,7 +127,9 @@ public class Semantic extends DepthFirstAdapter {
             else
                 indicePlusPetit = indices.get(0);
 
-            table_symboles.put(node.getIdentifiant().getText().replaceAll(" ",""),types[indicePlusPetit]);
+            String identifiant = node.getIdentifiant().getText().replaceAll(" ","").replaceAll("\t","").replaceAll("\n","").replaceAll("\r","");
+            String type = types[indicePlusPetit].replaceAll("\t","").replaceAll("\n","").replaceAll("\r","");
+            table_symboles.put(identifiant,type);
         }
     }
     public void inAAffectation(AAffectation node)
@@ -248,7 +257,7 @@ public class Semantic extends DepthFirstAdapter {
     }
     public void outAAlgorithmeProgramme(AAlgorithmeProgramme node)
     {
-        System.out.println(table_symboles);
+        Main.table_symboles = table_symboles;
     }
 
     public void outAConcatenationTerme(AConcatenationTerme node)
@@ -262,7 +271,5 @@ public class Semantic extends DepthFirstAdapter {
             System.exit(0);
         }
     }
-
-
 
 }
