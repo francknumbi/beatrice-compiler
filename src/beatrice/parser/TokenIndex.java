@@ -166,7 +166,7 @@ class TokenIndex extends AnalysisAdapter
     }
 
     @Override
-    public void caseTMod(@SuppressWarnings("unused") TMod node)
+    public void caseTModulo(@SuppressWarnings("unused") TModulo node)
     {
         this.index = 26;
     }

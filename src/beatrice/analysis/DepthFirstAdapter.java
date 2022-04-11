@@ -672,9 +672,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getFacteur().apply(this);
         }
-        if(node.getMod() != null)
+        if(node.getModulo() != null)
         {
-            node.getMod().apply(this);
+            node.getModulo().apply(this);
         }
         if(node.getTerme() != null)
         {

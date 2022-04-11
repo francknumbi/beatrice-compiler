@@ -585,7 +585,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTMod(TMod node)
+    public void caseTModulo(TModulo node)
     {
         defaultCase(node);
     }

@@ -98,7 +98,7 @@ public interface Analysis extends Switch
     void caseTPlus(TPlus node);
     void caseTMult(TMult node);
     void caseTDiv(TDiv node);
-    void caseTMod(TMod node);
+    void caseTModulo(TModulo node);
     void caseTPuissance(TPuissance node);
     void caseTOperateurSuperieur(TOperateurSuperieur node);
     void caseTOperateurInferieur(TOperateurInferieur node);

@@ -5,14 +5,14 @@ package beatrice.node;
 import beatrice.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TMod extends Token
+public final class TModulo extends Token
 {
-    public TMod()
+    public TModulo()
     {
         super.setText("mod");
     }
 
-    public TMod(int line, int pos)
+    public TModulo(int line, int pos)
     {
         super.setText("mod");
         setLine(line);
@@ -22,18 +22,18 @@ public final class TMod extends Token
     @Override
     public Object clone()
     {
-      return new TMod(getLine(), getPos());
+      return new TModulo(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTMod(this);
+        ((Analysis) sw).caseTModulo(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TMod text.");
+        throw new RuntimeException("Cannot change TModulo text.");
     }
 }

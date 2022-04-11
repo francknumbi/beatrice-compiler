@@ -1341,13 +1341,13 @@ public class Parser
         {
             // Block
         PFacteur pfacteurNode2;
-        TMod tmodNode3;
+        TModulo tmoduloNode3;
         PTerme ptermeNode4;
         pfacteurNode2 = (PFacteur)nodeArrayList1.get(0);
-        tmodNode3 = (TMod)nodeArrayList2.get(0);
+        tmoduloNode3 = (TModulo)nodeArrayList2.get(0);
         ptermeNode4 = (PTerme)nodeArrayList3.get(0);
 
-        pfacteurNode1 = new AModuloFacteur(pfacteurNode2, tmodNode3, ptermeNode4);
+        pfacteurNode1 = new AModuloFacteur(pfacteurNode2, tmoduloNode3, ptermeNode4);
         }
 	nodeList.add(pfacteurNode1);
         return nodeList;

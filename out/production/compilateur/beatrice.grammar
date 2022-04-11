@@ -39,7 +39,7 @@ Tokens
 	plus = '+';
 	mult = '*';
 	div = '/';
-	mod = 'mod';
+	modulo = 'mod';
 	puissance = '^';
 	operateur_superieur = '>';
 	operateur_inferieur = '<';
@@ -120,7 +120,7 @@ Productions
 			{terme} terme |
 			{multiplication} facteur mult terme |
 			{division} facteur div terme |
-			{modulo} facteur mod terme |
+			{modulo} facteur modulo terme |
 			{puissance} facteur puissance terme;
 			
 

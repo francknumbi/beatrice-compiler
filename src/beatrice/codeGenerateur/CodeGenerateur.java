@@ -155,6 +155,69 @@ public class CodeGenerateur extends DepthFirstAdapter {
             jasError.printStackTrace();
         }
     }
+    /**
+     *    OPERATIONS ARITHMETIQUES
+     */
+    public void outAAdditionExpress(AAdditionExpress node)
+    {
+        try {
+            if(typeVariableActuelle.equals("reel"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_fadd));
+            else if(typeVariableActuelle.equals("entier") | typeVariableActuelle.equals("byte"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_iadd));
+        } catch (jas.jasError jasError) {
+            jasError.printStackTrace();
+        }
+    }
+    public void outASoustractionExpress(ASoustractionExpress node)
+    {
+        try {
+            if(typeVariableActuelle.equals("reel"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_fsub));
+            else if(typeVariableActuelle.equals("entier") | typeVariableActuelle.equals("byte"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_isub));
+        } catch (jas.jasError jasError) {
+            jasError.printStackTrace();
+        }
+    }
+    public void outAMultiplicationFacteur(AMultiplicationFacteur node)
+    {
+        try {
+            if(typeVariableActuelle.equals("reel"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_fmul));
+            else if(typeVariableActuelle.equals("entier") | typeVariableActuelle.equals("byte"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_imul));
+        } catch (jas.jasError jasError) {
+            jasError.printStackTrace();
+        }
+    }
+    public void outADivisionFacteur(ADivisionFacteur node)
+    {
+        try {
+            if(typeVariableActuelle.equals("reel"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_fdiv));
+            else if(typeVariableActuelle.equals("entier") | typeVariableActuelle.equals("byte"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_idiv));
+        } catch (jas.jasError jasError) {
+            jasError.printStackTrace();
+        }
+    }
+    public void outAModuloFacteur(AModuloFacteur node)
+    {
+        try {
+            if(typeVariableActuelle.equals("reel"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_frem));
+            else if(typeVariableActuelle.equals("entier") | typeVariableActuelle.equals("byte"))
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_irem));
+        } catch (jas.jasError jasError) {
+            jasError.printStackTrace();
+        }
+    }
+    public void outAPuissanceFacteur(APuissanceFacteur node)
+    {
+
+    }
+
 
     /**
      * Affichage d un simple message ou simple identifiant

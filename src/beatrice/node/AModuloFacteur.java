@@ -8,7 +8,7 @@ import beatrice.analysis.*;
 public final class AModuloFacteur extends PFacteur
 {
     private PFacteur _facteur_;
-    private TMod _mod_;
+    private TModulo _modulo_;
     private PTerme _terme_;
 
     public AModuloFacteur()
@@ -18,13 +18,13 @@ public final class AModuloFacteur extends PFacteur
 
     public AModuloFacteur(
         @SuppressWarnings("hiding") PFacteur _facteur_,
-        @SuppressWarnings("hiding") TMod _mod_,
+        @SuppressWarnings("hiding") TModulo _modulo_,
         @SuppressWarnings("hiding") PTerme _terme_)
     {
         // Constructor
         setFacteur(_facteur_);
 
-        setMod(_mod_);
+        setModulo(_modulo_);
 
         setTerme(_terme_);
 
@@ -35,7 +35,7 @@ public final class AModuloFacteur extends PFacteur
     {
         return new AModuloFacteur(
             cloneNode(this._facteur_),
-            cloneNode(this._mod_),
+            cloneNode(this._modulo_),
             cloneNode(this._terme_));
     }
 
@@ -70,16 +70,16 @@ public final class AModuloFacteur extends PFacteur
         this._facteur_ = node;
     }
 
-    public TMod getMod()
+    public TModulo getModulo()
     {
-        return this._mod_;
+        return this._modulo_;
     }
 
-    public void setMod(TMod node)
+    public void setModulo(TModulo node)
     {
-        if(this._mod_ != null)
+        if(this._modulo_ != null)
         {
-            this._mod_.parent(null);
+            this._modulo_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AModuloFacteur extends PFacteur
             node.parent(this);
         }
 
-        this._mod_ = node;
+        this._modulo_ = node;
     }
 
     public PTerme getTerme()
@@ -125,7 +125,7 @@ public final class AModuloFacteur extends PFacteur
     {
         return ""
             + toString(this._facteur_)
-            + toString(this._mod_)
+            + toString(this._modulo_)
             + toString(this._terme_);
     }
 
@@ -139,9 +139,9 @@ public final class AModuloFacteur extends PFacteur
             return;
         }
 
-        if(this._mod_ == child)
+        if(this._modulo_ == child)
         {
-            this._mod_ = null;
+            this._modulo_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class AModuloFacteur extends PFacteur
             return;
         }
 
-        if(this._mod_ == oldChild)
+        if(this._modulo_ == oldChild)
         {
-            setMod((TMod) newChild);
+            setModulo((TModulo) newChild);
             return;
         }
 
