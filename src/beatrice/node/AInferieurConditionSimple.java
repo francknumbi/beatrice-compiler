@@ -7,9 +7,9 @@ import beatrice.analysis.*;
 @SuppressWarnings("nls")
 public final class AInferieurConditionSimple extends PConditionSimple
 {
-    private PTerme _gauche_;
+    private PExpress _gauche_;
     private TOperateurInferieur _operateurInferieur_;
-    private PTerme _droite_;
+    private PExpress _droite_;
 
     public AInferieurConditionSimple()
     {
@@ -17,9 +17,9 @@ public final class AInferieurConditionSimple extends PConditionSimple
     }
 
     public AInferieurConditionSimple(
-        @SuppressWarnings("hiding") PTerme _gauche_,
+        @SuppressWarnings("hiding") PExpress _gauche_,
         @SuppressWarnings("hiding") TOperateurInferieur _operateurInferieur_,
-        @SuppressWarnings("hiding") PTerme _droite_)
+        @SuppressWarnings("hiding") PExpress _droite_)
     {
         // Constructor
         setGauche(_gauche_);
@@ -45,12 +45,12 @@ public final class AInferieurConditionSimple extends PConditionSimple
         ((Analysis) sw).caseAInferieurConditionSimple(this);
     }
 
-    public PTerme getGauche()
+    public PExpress getGauche()
     {
         return this._gauche_;
     }
 
-    public void setGauche(PTerme node)
+    public void setGauche(PExpress node)
     {
         if(this._gauche_ != null)
         {
@@ -95,12 +95,12 @@ public final class AInferieurConditionSimple extends PConditionSimple
         this._operateurInferieur_ = node;
     }
 
-    public PTerme getDroite()
+    public PExpress getDroite()
     {
         return this._droite_;
     }
 
-    public void setDroite(PTerme node)
+    public void setDroite(PExpress node)
     {
         if(this._droite_ != null)
         {
@@ -160,7 +160,7 @@ public final class AInferieurConditionSimple extends PConditionSimple
         // Replace child
         if(this._gauche_ == oldChild)
         {
-            setGauche((PTerme) newChild);
+            setGauche((PExpress) newChild);
             return;
         }
 
@@ -172,7 +172,7 @@ public final class AInferieurConditionSimple extends PConditionSimple
 
         if(this._droite_ == oldChild)
         {
-            setDroite((PTerme) newChild);
+            setDroite((PExpress) newChild);
             return;
         }
 

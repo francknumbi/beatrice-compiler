@@ -34,10 +34,10 @@ public interface Analysis extends Switch
     void caseAExpress(AExpress node);
     void caseAAdditionExpress(AAdditionExpress node);
     void caseASoustractionExpress(ASoustractionExpress node);
+    void caseAModuloFacteur(AModuloFacteur node);
     void caseATermeFacteur(ATermeFacteur node);
     void caseAMultiplicationFacteur(AMultiplicationFacteur node);
     void caseADivisionFacteur(ADivisionFacteur node);
-    void caseAModuloFacteur(AModuloFacteur node);
     void caseAPuissanceFacteur(APuissanceFacteur node);
     void caseAValeurEntiereTerme(AValeurEntiereTerme node);
     void caseAValeurReelTerme(AValeurReelTerme node);
@@ -78,6 +78,7 @@ public interface Analysis extends Switch
     void caseTConst(TConst node);
     void caseTDebut(TDebut node);
     void caseTFin(TFin node);
+    void caseTOperateurModulo(TOperateurModulo node);
     void caseTEntier(TEntier node);
     void caseTReel(TReel node);
     void caseTByte(TByte node);
@@ -98,7 +99,6 @@ public interface Analysis extends Switch
     void caseTPlus(TPlus node);
     void caseTMult(TMult node);
     void caseTDiv(TDiv node);
-    void caseTModulo(TModulo node);
     void caseTPuissance(TPuissance node);
     void caseTOperateurSuperieur(TOperateurSuperieur node);
     void caseTOperateurInferieur(TOperateurInferieur node);

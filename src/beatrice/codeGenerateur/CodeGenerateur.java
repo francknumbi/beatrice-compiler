@@ -156,6 +156,38 @@ public class CodeGenerateur extends DepthFirstAdapter {
         }
     }
     /**
+     *  PLACER LA VALEUR D'UNE VARIABLE DANS LA PILE
+     */
+    public void outAIdentifiantTerme(AIdentifiantTerme node)
+    {
+        String type = table_symboles.get(node.getIdentifiant().getText());
+        String identifiant = node.getIdentifiant().getText();
+        System.out.println("ouiiiiiiiiiiiii");
+        if (type != null && type.equals("reel")){
+            System.out.println("nonnnnnnnnnnn");
+            try {
+                main_methode.addInsn(new Insn(RuntimeConstants.opc_getstatic,new FieldCP(nomClass, identifiant, "F")));
+            } catch (jas.jasError jasError) {
+                jasError.printStackTrace();
+            }
+        }
+        else if(type.equals("entier") | type.equals("byte")){
+            System.out.println("ouiiiiiiiiiiiii");
+            try {
+                if(typeVariableActuelle.equals("reel")){
+                    main_methode.addInsn(new Insn(RuntimeConstants.opc_getstatic,new FieldCP(nomClass, identifiant, "I")));
+                    main_methode.addInsn(new Insn(RuntimeConstants.opc_i2f));
+                }
+                else if(typeVariableActuelle.equals("entier")) {
+                    main_methode.addInsn(new Insn(RuntimeConstants.opc_getstatic,new FieldCP(nomClass, identifiant, "I")));
+                }
+            } catch (jas.jasError jasError) {
+                jasError.printStackTrace();
+            }
+        }
+        System.out.println("identifiant = "+identifiant.length() +" type ="+type);
+    }
+    /**
      *    OPERATIONS ARITHMETIQUES
      */
     public void outAAdditionExpress(AAdditionExpress node)
@@ -213,6 +245,7 @@ public class CodeGenerateur extends DepthFirstAdapter {
             jasError.printStackTrace();
         }
     }
+
     public void outAPuissanceFacteur(APuissanceFacteur node)
     {
 

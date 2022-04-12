@@ -7,9 +7,9 @@ import beatrice.analysis.*;
 @SuppressWarnings("nls")
 public final class AEgalConditionSimple extends PConditionSimple
 {
-    private PTerme _gauche_;
+    private PExpress _gauche_;
     private TOperateurEgal _operateurEgal_;
-    private PTerme _droite_;
+    private PExpress _droite_;
 
     public AEgalConditionSimple()
     {
@@ -17,9 +17,9 @@ public final class AEgalConditionSimple extends PConditionSimple
     }
 
     public AEgalConditionSimple(
-        @SuppressWarnings("hiding") PTerme _gauche_,
+        @SuppressWarnings("hiding") PExpress _gauche_,
         @SuppressWarnings("hiding") TOperateurEgal _operateurEgal_,
-        @SuppressWarnings("hiding") PTerme _droite_)
+        @SuppressWarnings("hiding") PExpress _droite_)
     {
         // Constructor
         setGauche(_gauche_);
@@ -45,12 +45,12 @@ public final class AEgalConditionSimple extends PConditionSimple
         ((Analysis) sw).caseAEgalConditionSimple(this);
     }
 
-    public PTerme getGauche()
+    public PExpress getGauche()
     {
         return this._gauche_;
     }
 
-    public void setGauche(PTerme node)
+    public void setGauche(PExpress node)
     {
         if(this._gauche_ != null)
         {
@@ -95,12 +95,12 @@ public final class AEgalConditionSimple extends PConditionSimple
         this._operateurEgal_ = node;
     }
 
-    public PTerme getDroite()
+    public PExpress getDroite()
     {
         return this._droite_;
     }
 
-    public void setDroite(PTerme node)
+    public void setDroite(PExpress node)
     {
         if(this._droite_ != null)
         {
@@ -160,7 +160,7 @@ public final class AEgalConditionSimple extends PConditionSimple
         // Replace child
         if(this._gauche_ == oldChild)
         {
-            setGauche((PTerme) newChild);
+            setGauche((PExpress) newChild);
             return;
         }
 
@@ -172,7 +172,7 @@ public final class AEgalConditionSimple extends PConditionSimple
 
         if(this._droite_ == oldChild)
         {
-            setDroite((PTerme) newChild);
+            setDroite((PExpress) newChild);
             return;
         }
 

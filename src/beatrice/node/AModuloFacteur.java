@@ -8,7 +8,7 @@ import beatrice.analysis.*;
 public final class AModuloFacteur extends PFacteur
 {
     private PFacteur _facteur_;
-    private TModulo _modulo_;
+    private TOperateurModulo _operateurModulo_;
     private PTerme _terme_;
 
     public AModuloFacteur()
@@ -18,13 +18,13 @@ public final class AModuloFacteur extends PFacteur
 
     public AModuloFacteur(
         @SuppressWarnings("hiding") PFacteur _facteur_,
-        @SuppressWarnings("hiding") TModulo _modulo_,
+        @SuppressWarnings("hiding") TOperateurModulo _operateurModulo_,
         @SuppressWarnings("hiding") PTerme _terme_)
     {
         // Constructor
         setFacteur(_facteur_);
 
-        setModulo(_modulo_);
+        setOperateurModulo(_operateurModulo_);
 
         setTerme(_terme_);
 
@@ -35,7 +35,7 @@ public final class AModuloFacteur extends PFacteur
     {
         return new AModuloFacteur(
             cloneNode(this._facteur_),
-            cloneNode(this._modulo_),
+            cloneNode(this._operateurModulo_),
             cloneNode(this._terme_));
     }
 
@@ -70,16 +70,16 @@ public final class AModuloFacteur extends PFacteur
         this._facteur_ = node;
     }
 
-    public TModulo getModulo()
+    public TOperateurModulo getOperateurModulo()
     {
-        return this._modulo_;
+        return this._operateurModulo_;
     }
 
-    public void setModulo(TModulo node)
+    public void setOperateurModulo(TOperateurModulo node)
     {
-        if(this._modulo_ != null)
+        if(this._operateurModulo_ != null)
         {
-            this._modulo_.parent(null);
+            this._operateurModulo_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AModuloFacteur extends PFacteur
             node.parent(this);
         }
 
-        this._modulo_ = node;
+        this._operateurModulo_ = node;
     }
 
     public PTerme getTerme()
@@ -125,7 +125,7 @@ public final class AModuloFacteur extends PFacteur
     {
         return ""
             + toString(this._facteur_)
-            + toString(this._modulo_)
+            + toString(this._operateurModulo_)
             + toString(this._terme_);
     }
 
@@ -139,9 +139,9 @@ public final class AModuloFacteur extends PFacteur
             return;
         }
 
-        if(this._modulo_ == child)
+        if(this._operateurModulo_ == child)
         {
-            this._modulo_ = null;
+            this._operateurModulo_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class AModuloFacteur extends PFacteur
             return;
         }
 
-        if(this._modulo_ == oldChild)
+        if(this._operateurModulo_ == oldChild)
         {
-            setModulo((TModulo) newChild);
+            setOperateurModulo((TOperateurModulo) newChild);
             return;
         }
 

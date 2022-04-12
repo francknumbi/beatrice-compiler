@@ -207,6 +207,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAModuloFacteur(AModuloFacteur node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseATermeFacteur(ATermeFacteur node)
     {
         defaultCase(node);
@@ -220,12 +226,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseADivisionFacteur(ADivisionFacteur node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAModuloFacteur(AModuloFacteur node)
     {
         defaultCase(node);
     }
@@ -465,6 +465,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTOperateurModulo(TOperateurModulo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTEntier(TEntier node)
     {
         defaultCase(node);
@@ -580,12 +586,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTDiv(TDiv node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTModulo(TModulo node)
     {
         defaultCase(node);
     }

@@ -575,6 +575,35 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outASoustractionExpress(node);
     }
 
+    public void inAModuloFacteur(AModuloFacteur node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAModuloFacteur(AModuloFacteur node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAModuloFacteur(AModuloFacteur node)
+    {
+        inAModuloFacteur(node);
+        if(node.getFacteur() != null)
+        {
+            node.getFacteur().apply(this);
+        }
+        if(node.getOperateurModulo() != null)
+        {
+            node.getOperateurModulo().apply(this);
+        }
+        if(node.getTerme() != null)
+        {
+            node.getTerme().apply(this);
+        }
+        outAModuloFacteur(node);
+    }
+
     public void inATermeFacteur(ATermeFacteur node)
     {
         defaultIn(node);
@@ -652,35 +681,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getTerme().apply(this);
         }
         outADivisionFacteur(node);
-    }
-
-    public void inAModuloFacteur(AModuloFacteur node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAModuloFacteur(AModuloFacteur node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAModuloFacteur(AModuloFacteur node)
-    {
-        inAModuloFacteur(node);
-        if(node.getFacteur() != null)
-        {
-            node.getFacteur().apply(this);
-        }
-        if(node.getModulo() != null)
-        {
-            node.getModulo().apply(this);
-        }
-        if(node.getTerme() != null)
-        {
-            node.getTerme().apply(this);
-        }
-        outAModuloFacteur(node);
     }
 
     public void inAPuissanceFacteur(APuissanceFacteur node)

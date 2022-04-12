@@ -19,6 +19,7 @@ Tokens
 	const = 'const';
 	debut = 'debut';
 	fin = 'fin';
+	operateur_modulo = 'mod';
 	entier = 'entier';
 	reel = 'reel';
 	byte = 'byte';
@@ -39,7 +40,6 @@ Tokens
 	plus = '+';
 	mult = '*';
 	div = '/';
-	modulo = 'mod';
 	puissance = '^';
 	operateur_superieur = '>';
 	operateur_inferieur = '<';
@@ -117,10 +117,10 @@ Productions
 			{soustraction} express moins facteur;
 
 	facteur = 
+			{modulo}facteur operateur_modulo terme |
 			{terme} terme |
 			{multiplication} facteur mult terme |
 			{division} facteur div terme |
-			{modulo} facteur modulo terme |
 			{puissance} facteur puissance terme;
 			
 
@@ -166,12 +166,12 @@ Productions
 			{compose} condition_compose;
 
 	condition_simple = 
-			{inferieur} [gauche]:terme operateur_inferieur [droite]:terme | 
-			{superieur}	[gauche]:terme operateur_superieur [droite]:terme |
-			{different} [gauche]:terme operateur_different [droite]:terme |
-			{egal}	 	[gauche]:terme operateur_egal [droite]:terme |
-			{supegal}	[gauche]:terme operateur_superieur_egal [droite]:terme |
-			{infegal}	[gauche]:terme operateur_inferieur_egal [droite]:terme |
+			{inferieur} [gauche]:express operateur_inferieur [droite]:express | 
+			{superieur}	[gauche]:express operateur_superieur [droite]:express |
+			{different} [gauche]:express operateur_different [droite]:express |
+			{egal}	 	[gauche]:express operateur_egal [droite]:express |
+			{supegal}	[gauche]:express operateur_superieur_egal [droite]:express |
+			{infegal}	[gauche]:express operateur_inferieur_egal [droite]:express |
 			{parenthese}parenthese_o condition_simple parenthese_f; 
 	
 	condition_compose = 
