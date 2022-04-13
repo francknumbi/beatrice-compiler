@@ -178,7 +178,7 @@ public class CodeGenerateur extends DepthFirstAdapter {
                     main_methode.addInsn(new Insn(RuntimeConstants.opc_getstatic,new FieldCP(nomClass, identifiant, "I")));
                     main_methode.addInsn(new Insn(RuntimeConstants.opc_i2f));
                 }
-                else if(typeVariableActuelle.equals("entier")) {
+                else if(typeVariableActuelle.equals("entier") | type.equals("byte")) {
                     main_methode.addInsn(new Insn(RuntimeConstants.opc_getstatic,new FieldCP(nomClass, identifiant, "I")));
                 }
             } catch (jas.jasError jasError) {
